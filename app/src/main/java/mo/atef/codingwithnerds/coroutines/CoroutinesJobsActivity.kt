@@ -18,8 +18,16 @@ class CoroutinesJobsActivity : AppCompatActivity() {
             /*
             if network call failed, the database call will fail as all of the job will fail.
              */
-            launch { getUserDataFromNetwork() }
-            launch { getUserDataFromDatabase() }
+            val child1= launch { getUserDataFromNetwork() }
+            val child2= launch { getUserDataFromDatabase() }
+
+            /*
+            delay after both child1 and child2 coroutines finishes
+             */
+            child1.join()
+            child2.join()
+
+            launch { delay(2000) }
         }
 
         job.cancel()
