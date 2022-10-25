@@ -16,7 +16,7 @@ class CoroutinesJobsActivity : AppCompatActivity() {
         val parentJob = Job()
         val job:Job = GlobalScope.launch(parentJob) {
             /*
-            if network call failed, the database call will fall as all of the job will fail.
+            if network call failed, the database call will fail as all of the job will fail.
              */
             launch { getUserDataFromNetwork() }
             launch { getUserDataFromDatabase() }
