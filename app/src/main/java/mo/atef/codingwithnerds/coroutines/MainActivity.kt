@@ -13,21 +13,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tvPrint=findViewById<TextView>(R.id.tvPrint)
+        tvPrint = findViewById<TextView>(R.id.tvPrint)
 
-        Log.d("MainActivity", "Main Thread")
-        runBlocking{
-            Log.d("fun", "MainActivity, Thread is : ${Thread.currentThread().name}")
-            printTextAfterDelay("atef")
-            tvPrint?.text="atef"
-
+        GlobalScope.launch {
+            printTextAfterDelay("atef1")
+            printTextAfterDelay("atef2")
         }
-
-        Log.d("MainActivity", "Back to Main Thread")
     }
 
     suspend fun printTextAfterDelay(myText: String) {
-        Log.d("MainActivity", "IO Thread")
         delay(2000)
+        Log.d("MainActivity", myText)
     }
 }
