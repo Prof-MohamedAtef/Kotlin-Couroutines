@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
             printTextAfterDelay("atef1")
             printTextAfterDelay("atef2")
         }
+
+
     }
 
     suspend fun printTextAfterDelay(myText: String) = GlobalScope.launch {
