@@ -17,8 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("MainActivity", "Main Thread")
         runBlocking{
-            Log.d("fun", "current Thread : ${Thread.currentThread().name}")
+            Log.d("fun", "MainActivity, Thread is : ${Thread.currentThread().name}")
             printTextAfterDelay("atef")
+            tvPrint?.text="atef"
+
         }
 
         Log.d("MainActivity", "Back to Main Thread")
