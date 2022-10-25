@@ -24,6 +24,9 @@ class CoroutinesJobsActivity : AppCompatActivity() {
 //            child1.join()
 //            child2.join()
 
+            /*
+            joinAll() is used to communicate jobs together
+             */
             joinAll(child1, child2)
 
             launch { delay(2000) }
