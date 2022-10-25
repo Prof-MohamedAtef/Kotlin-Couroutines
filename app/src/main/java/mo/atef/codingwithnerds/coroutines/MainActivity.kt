@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         tvPrint=findViewById<TextView>(R.id.tvPrint)
 
         Log.d("MainActivity", "Main Thread")
-        GlobalScope.launch{
+        runBlocking{
             Log.d("fun", "current Thread : ${Thread.currentThread().name}")
             printTextAfterDelay("atef")
         }
@@ -25,12 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     suspend fun printTextAfterDelay(myText: String) {
-        GlobalScope.launch(Dispatchers.IO) {
-            Log.d("MainActivity", "IO Thread")
-            delay(2000)
-            withContext(Dispatchers.Main){
-                tvPrint?.setText(myText)
-            }
-        }
+        Log.d("MainActivity", "IO Thread")
+        delay(2000)
     }
 }
