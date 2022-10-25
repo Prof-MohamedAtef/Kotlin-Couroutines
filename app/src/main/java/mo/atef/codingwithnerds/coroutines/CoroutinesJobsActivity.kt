@@ -2,10 +2,7 @@ package mo.atef.codingwithnerds.coroutines
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class CoroutinesJobsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +21,10 @@ class CoroutinesJobsActivity : AppCompatActivity() {
             /*
             delay after both child1 and child2 coroutines finishes
              */
-            child1.join()
-            child2.join()
+//            child1.join()
+//            child2.join()
+
+            joinAll(child1, child2)
 
             launch { delay(2000) }
         }
