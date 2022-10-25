@@ -38,7 +38,7 @@ class AsyncAwaitActivity : AppCompatActivity() {
     }
 
     suspend fun getUserDataFromDatabase():String{
-        delay(2000)
+        delay(4000)
         return "Atef"
     }
 }
