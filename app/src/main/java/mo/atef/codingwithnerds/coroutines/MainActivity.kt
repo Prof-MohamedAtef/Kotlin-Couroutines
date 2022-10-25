@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         tvPrint = findViewById<TextView>(R.id.tvPrint)
 
         GlobalScope.launch {
-            GlobalScope.launch { printTextAfterDelay("atef1") }
-            GlobalScope.launch { printTextAfterDelay("atef2") }
+            launch { printTextAfterDelay("atef1") }
+            launch { printTextAfterDelay("atef2") }
         }
     }
 
