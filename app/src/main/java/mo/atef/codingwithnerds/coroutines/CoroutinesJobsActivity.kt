@@ -5,12 +5,32 @@ import android.os.Bundle
 import kotlinx.coroutines.*
 
 class CoroutinesJobsActivity : AppCompatActivity() {
+    val parentJob:Job=Job()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coroutines_jobs)
 
+        val coroutineScope:CoroutineScope= CoroutineScope(Dispatchers.IO+parentJob)
 
-        val parentJob = Job()
+        coroutineScope.launch {
+            val child1= launch { getUserDataFromNetwork() }
+            val child2= launch { getUserDataFromDatabase() }
+            /*
+            any other coroutine can be used here
+            with the same defined dispatcher and the parent job
+             */
+
+            /*
+           using coroutine scope with dispatcher IO and Job
+            */
+
+            /*
+            create global CoroutineScope and combine other background and long-running functions inside it
+            with 1 IO Dispatcher for example
+             */
+        }
+
+
         val job:Job = GlobalScope.launch(parentJob) {
             /*
             if network call failed, the database call will fail as all of the job will fail.
@@ -33,12 +53,23 @@ class CoroutinesJobsActivity : AppCompatActivity() {
             cancel and join
             wait the job to be finished then cancel it
              */
-            child1.cancelAndJoin()
+//            child1.cancelAndJoin()
+
+
+
 
             launch { delay(2000) }
         }
 
-        job.cancel()
+
+
+
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        parentJob.cancel()
     }
 
     suspend fun getUserDataFromNetwork():String{
