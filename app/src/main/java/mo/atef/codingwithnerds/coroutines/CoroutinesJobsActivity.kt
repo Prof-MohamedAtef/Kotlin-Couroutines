@@ -12,7 +12,12 @@ class CoroutinesJobsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coroutines_jobs)
 
-        val job:Job = GlobalScope.launch {
+
+        val parentJob = Job()
+        val job:Job = GlobalScope.launch(parentJob) {
+            /*
+            if network call failed, the database call will fall as all of the job will fail.
+             */
             launch { getUserDataFromNetwork() }
             launch { getUserDataFromDatabase() }
         }
