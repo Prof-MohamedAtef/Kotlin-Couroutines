@@ -16,15 +16,13 @@ class MainActivity : AppCompatActivity() {
         tvPrint = findViewById<TextView>(R.id.tvPrint)
 
         GlobalScope.launch {
-            printTextAfterDelay("atef1")
-            printTextAfterDelay("atef2")
+            GlobalScope.launch { printTextAfterDelay("atef1") }
+            GlobalScope.launch { printTextAfterDelay("atef2") }
         }
     }
 
-    suspend fun printTextAfterDelay(myText: String) {
-        GlobalScope.launch {
-            delay(2000)
-            Log.d("MainActivity", myText)
-        }
+    suspend fun printTextAfterDelay(myText: String) = GlobalScope.launch {
+        delay(2000)
+        Log.d("MainActivity", myText)
     }
 }
