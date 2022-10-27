@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
@@ -24,7 +25,7 @@ class FlowActivityImpl : AppCompatActivity() {
             }
         }.filter { i->i<10 } // added intermediate step
 
-            .collect{
+            .buffer().collect{   // added buffer to accelerate receiving data from producer
                 delay(2000)
                 Log.d("Here Collector", it.toString())
             } // added collector to receive data from producer directly - slow way
