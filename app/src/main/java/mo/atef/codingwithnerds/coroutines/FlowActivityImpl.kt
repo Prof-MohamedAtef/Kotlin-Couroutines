@@ -35,7 +35,7 @@ class FlowActivityImpl : AppCompatActivity() {
         // second example
         /*
         added 2 flows and zipped them together.
-        Joining these flows to produce an output
+        Joining these flows to produce a common output
          */
         runBlocking {
             val flow1 = flow<Int> {
